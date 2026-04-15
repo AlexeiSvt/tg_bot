@@ -2,7 +2,7 @@ package states
 
 import (
 	"sync"
-	"tgbot/models"
+	"tgbot/internal/models"
 )
 
 type State string

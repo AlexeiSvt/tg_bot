@@ -5,7 +5,6 @@ import (
 	"log"
 )
 
-// migrate creates necessary tables if they don't exist
 func migrate(db *sql.DB) error {
 	_, err := db.Exec(`
 CREATE TABLE IF NOT EXISTS users (

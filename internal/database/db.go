@@ -6,7 +6,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// Open connects to Postgres using DSN and runs migrations
 func Open(dsn string) (*sql.DB, error) {
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {

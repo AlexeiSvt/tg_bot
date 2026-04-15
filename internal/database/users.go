@@ -3,10 +3,9 @@ package database
 import (
 	"database/sql"
 	"encoding/json"
-	"tgbot/models"
+	"tgbot/internal/models"
 )
 
-// SaveUser inserts or updates a user record (upsert on tg_id)
 func SaveUser(db *sql.DB, u *models.User) error {
 	disciplinesJSON, err := json.Marshal(u.Disciplines)
 	if err != nil {

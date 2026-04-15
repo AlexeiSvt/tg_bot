@@ -5,10 +5,10 @@ import (
     "fmt"
     "log"
 
-    "tgbot/database"
-    "tgbot/models"
-    "tgbot/states"
-    "tgbot/utils"
+    "tgbot/internal/database"
+    "tgbot/internal/models"
+    "tgbot/internal/states"
+    "tgbot/internal/utils"
 
     tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )

@@ -12,9 +12,7 @@ type Config struct {
 	DBDSN         string
 }
 
-// Load reads environment variables (supports .env) and builds Postgres DSN
 func Load() (*Config, error) {
-	// load .env if present (no error if missing)
 	_ = godotenv.Load()
 
 	token := os.Getenv("BOT_TOKEN")
@@ -22,7 +20,6 @@ func Load() (*Config, error) {
 		token = os.Getenv("TELEGRAM_TOKEN")
 	}
 
-	// Support DATABASE_URL or separate DB_* variables
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
 		host := os.Getenv("DB_HOST")
