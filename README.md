@@ -48,7 +48,7 @@ For organizers, it simplifies participant management and reduces manual work.
 - **Language:** Go (Golang)  
 - **Web Framework:** Gin  
 - **Database:** PostgreSQL  
-- **Telegram API:** `tg` library by Ilya Kaznacheev  
+- **Telegram API**
 - **Deployment:** Railway  
 
 ---
