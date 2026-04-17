@@ -1,4 +1,6 @@
 package constants
 
+import "os"
 
-const AdminChatID = 6486655216
+
+var AdminChatID = os.Getenv("ADMIN_ID")

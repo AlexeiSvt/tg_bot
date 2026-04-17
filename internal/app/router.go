@@ -2,6 +2,8 @@ package app
 
 import (
 	"database/sql"
+	"log"
+	"strconv"
 	"tgbot/internal/backup"
 	"tgbot/internal/constants"
 	"tgbot/internal/handlers"
@@ -28,20 +30,25 @@ func HandleMessage(bot *tgbotapi.BotAPI, db *sql.DB, mgr *states.Manager, update
 	}
 
 	switch update.Message.Command() {
-	case "start":
+	case Start:
 		handlers.HandleStart(bot, mgr, update)
-	case "help":
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Используйте /start для регистрации, /cancel для отмены, /mystats для просмотра данных.")
+	case Help:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, StartMessage)
 		bot.Send(msg)
-	case "cancel":
+	case Cancel:
 		mgr.Reset(update.Message.From.ID)
-		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Регистрация отменена."))
-	case "backup":
-		if update.Message.Chat.ID == constants.AdminChatID {
+		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, CancelRegistration))
+	case Backup:
+		chatID, err := strconv.ParseInt(constants.AdminChatID, 10, 64)
+		if err != nil {
+			log.Fatalf("%s: %v", InvalidChatID, err)
+		}
+
+		if update.Message.Chat.ID == chatID {
 			go backup.PerformBackup(bot, db)
-			bot.Send(tgbotapi.NewMessage(constants.AdminChatID, "⏳ Создаю бэкап..."))
+			bot.Send(tgbotapi.NewMessage(chatID, CreateBackup))
 		}
 	default:
-		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Неизвестная команда"))
+		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, UnknownCommand))
 	}
 }
